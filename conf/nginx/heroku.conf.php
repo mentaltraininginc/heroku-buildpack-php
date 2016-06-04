@@ -96,7 +96,7 @@ http {
         # FIXME: breaks redirects with foreman
         port_in_redirect off;
         
-        root web;
+        root web/;
         
         error_log stderr;
         access_log /tmp/heroku.nginx_access.<?=getenv('PORT')?:'8080'?>.log;
