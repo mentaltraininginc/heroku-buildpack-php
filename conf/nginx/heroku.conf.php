@@ -206,7 +206,7 @@ http {
     }
 
     ##############################
-    # ntsc-nc.mticap.com         #
+    # usta-nc.mticap.com         #
     ##############################
     server {
         # define an easy to reference name that can be used in try_files
@@ -228,12 +228,12 @@ http {
         }
         
         # TODO: use X-Forwarded-Host? http://comments.gmane.org/gmane.comp.web.nginx.english/2170
-        server_name ntsc-nc.mticap.com;
+        server_name usta-nc.mticap.com;
         listen <?=getenv('PORT')?:'8080'?>;
         # FIXME: breaks redirects with foreman
         port_in_redirect off;
         
-        root "<?=getenv('DOCUMENT_ROOT')?:getenv('HEROKU_APP_DIR')?:getcwd()?>/ntsc-nc-mticap-com/";
+        root "<?=getenv('DOCUMENT_ROOT')?:getenv('HEROKU_APP_DIR')?:getcwd()?>/usta-nc-mticap-com/";
         
         error_log stderr;
         access_log /tmp/heroku.nginx_access.<?=getenv('PORT')?:'8080'?>.log;
