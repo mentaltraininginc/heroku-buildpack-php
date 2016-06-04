@@ -160,4 +160,224 @@ http {
             try_files @heroku-fcgi @heroku-fcgi;
         }
     }
+
+    ##############################
+    # mticap.com                 #
+    ##############################
+    server {
+        # define an easy to reference name that can be used in try_files
+        location @heroku-fcgi {
+            include fastcgi_params;
+            
+            fastcgi_split_path_info ^(.+\.php)(/.*)$;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            # try_files resets $fastcgi_path_info, see http://trac.nginx.org/nginx/ticket/321, so we use the if instead
+            fastcgi_param PATH_INFO $fastcgi_path_info if_not_empty;
+            
+            if (!-f $document_root$fastcgi_script_name) {
+                # check if the script exists
+                # otherwise, /foo.jpg/bar.php would get passed to FPM, which wouldn't run it as it's not in the list of allowed extensions, but this check is a good idea anyway, just in case
+                return 404;
+            }
+            
+            fastcgi_pass heroku-fcgi;
+        }
+        
+        # TODO: use X-Forwarded-Host? http://comments.gmane.org/gmane.comp.web.nginx.english/2170
+        server_name mticap.com;
+        listen <?=getenv('PORT')?:'8080'?>;
+        # FIXME: breaks redirects with foreman
+        port_in_redirect off;
+        
+        root "<?=getenv('DOCUMENT_ROOT')?:getenv('HEROKU_APP_DIR')?:getcwd()?>/mticap-com/";
+        
+        error_log stderr;
+        access_log /tmp/heroku.nginx_access.<?=getenv('PORT')?:'8080'?>.log;
+        
+        # restrict access to hidden files, just in case
+        location ~ /\. {
+            deny all;
+        }
+        
+        # default handling of .php
+        location ~ \.php {
+            try_files @heroku-fcgi @heroku-fcgi;
+        }
+    }
+
+    ##############################
+    # ntsc-nc.mticap.com         #
+    ##############################
+    server {
+        # define an easy to reference name that can be used in try_files
+        location @heroku-fcgi {
+            include fastcgi_params;
+            
+            fastcgi_split_path_info ^(.+\.php)(/.*)$;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            # try_files resets $fastcgi_path_info, see http://trac.nginx.org/nginx/ticket/321, so we use the if instead
+            fastcgi_param PATH_INFO $fastcgi_path_info if_not_empty;
+            
+            if (!-f $document_root$fastcgi_script_name) {
+                # check if the script exists
+                # otherwise, /foo.jpg/bar.php would get passed to FPM, which wouldn't run it as it's not in the list of allowed extensions, but this check is a good idea anyway, just in case
+                return 404;
+            }
+            
+            fastcgi_pass heroku-fcgi;
+        }
+        
+        # TODO: use X-Forwarded-Host? http://comments.gmane.org/gmane.comp.web.nginx.english/2170
+        server_name ntsc-nc.mticap.com;
+        listen <?=getenv('PORT')?:'8080'?>;
+        # FIXME: breaks redirects with foreman
+        port_in_redirect off;
+        
+        root "<?=getenv('DOCUMENT_ROOT')?:getenv('HEROKU_APP_DIR')?:getcwd()?>/ntsc-nc-mticap-com/";
+        
+        error_log stderr;
+        access_log /tmp/heroku.nginx_access.<?=getenv('PORT')?:'8080'?>.log;
+        
+        # restrict access to hidden files, just in case
+        location ~ /\. {
+            deny all;
+        }
+        
+        # default handling of .php
+        location ~ \.php {
+            try_files @heroku-fcgi @heroku-fcgi;
+        }
+    }
+
+    ##############################
+    # lafontbooks.com            #
+    ##############################
+    server {
+        # define an easy to reference name that can be used in try_files
+        location @heroku-fcgi {
+            include fastcgi_params;
+            
+            fastcgi_split_path_info ^(.+\.php)(/.*)$;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            # try_files resets $fastcgi_path_info, see http://trac.nginx.org/nginx/ticket/321, so we use the if instead
+            fastcgi_param PATH_INFO $fastcgi_path_info if_not_empty;
+            
+            if (!-f $document_root$fastcgi_script_name) {
+                # check if the script exists
+                # otherwise, /foo.jpg/bar.php would get passed to FPM, which wouldn't run it as it's not in the list of allowed extensions, but this check is a good idea anyway, just in case
+                return 404;
+            }
+            
+            fastcgi_pass heroku-fcgi;
+        }
+        
+        # TODO: use X-Forwarded-Host? http://comments.gmane.org/gmane.comp.web.nginx.english/2170
+        server_name lafontbooks.com;
+        listen <?=getenv('PORT')?:'8080'?>;
+        # FIXME: breaks redirects with foreman
+        port_in_redirect off;
+        
+        root "<?=getenv('DOCUMENT_ROOT')?:getenv('HEROKU_APP_DIR')?:getcwd()?>/lafontbooks-com/";
+        
+        error_log stderr;
+        access_log /tmp/heroku.nginx_access.<?=getenv('PORT')?:'8080'?>.log;
+        
+        # restrict access to hidden files, just in case
+        location ~ /\. {
+            deny all;
+        }
+        
+        # default handling of .php
+        location ~ \.php {
+            try_files @heroku-fcgi @heroku-fcgi;
+        }
+    }
+
+    ##############################
+    # imentaltrainer.com         #
+    ##############################
+    server {
+        # define an easy to reference name that can be used in try_files
+        location @heroku-fcgi {
+            include fastcgi_params;
+            
+            fastcgi_split_path_info ^(.+\.php)(/.*)$;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            # try_files resets $fastcgi_path_info, see http://trac.nginx.org/nginx/ticket/321, so we use the if instead
+            fastcgi_param PATH_INFO $fastcgi_path_info if_not_empty;
+            
+            if (!-f $document_root$fastcgi_script_name) {
+                # check if the script exists
+                # otherwise, /foo.jpg/bar.php would get passed to FPM, which wouldn't run it as it's not in the list of allowed extensions, but this check is a good idea anyway, just in case
+                return 404;
+            }
+            
+            fastcgi_pass heroku-fcgi;
+        }
+        
+        # TODO: use X-Forwarded-Host? http://comments.gmane.org/gmane.comp.web.nginx.english/2170
+        server_name imentaltrainer.com;
+        listen <?=getenv('PORT')?:'8080'?>;
+        # FIXME: breaks redirects with foreman
+        port_in_redirect off;
+        
+        root "<?=getenv('DOCUMENT_ROOT')?:getenv('HEROKU_APP_DIR')?:getcwd()?>/imentaltrainer-com/";
+        
+        error_log stderr;
+        access_log /tmp/heroku.nginx_access.<?=getenv('PORT')?:'8080'?>.log;
+        
+        # restrict access to hidden files, just in case
+        location ~ /\. {
+            deny all;
+        }
+        
+        # default handling of .php
+        location ~ \.php {
+            try_files @heroku-fcgi @heroku-fcgi;
+        }
+    }
+
+    ###############################
+    # mentaltrainingclassroom.com #
+    ###############################
+    server {
+        # define an easy to reference name that can be used in try_files
+        location @heroku-fcgi {
+            include fastcgi_params;
+            
+            fastcgi_split_path_info ^(.+\.php)(/.*)$;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            # try_files resets $fastcgi_path_info, see http://trac.nginx.org/nginx/ticket/321, so we use the if instead
+            fastcgi_param PATH_INFO $fastcgi_path_info if_not_empty;
+            
+            if (!-f $document_root$fastcgi_script_name) {
+                # check if the script exists
+                # otherwise, /foo.jpg/bar.php would get passed to FPM, which wouldn't run it as it's not in the list of allowed extensions, but this check is a good idea anyway, just in case
+                return 404;
+            }
+            
+            fastcgi_pass heroku-fcgi;
+        }
+        
+        # TODO: use X-Forwarded-Host? http://comments.gmane.org/gmane.comp.web.nginx.english/2170
+        server_name mentaltrainingclassroom.com;
+        listen <?=getenv('PORT')?:'8080'?>;
+        # FIXME: breaks redirects with foreman
+        port_in_redirect off;
+        
+        root "<?=getenv('DOCUMENT_ROOT')?:getenv('HEROKU_APP_DIR')?:getcwd()?>/mentaltrainingclassroom-com/";
+        
+        error_log stderr;
+        access_log /tmp/heroku.nginx_access.<?=getenv('PORT')?:'8080'?>.log;
+        
+        # restrict access to hidden files, just in case
+        location ~ /\. {
+            deny all;
+        }
+        
+        # default handling of .php
+        location ~ \.php {
+            try_files @heroku-fcgi @heroku-fcgi;
+        }
+    }
 }
