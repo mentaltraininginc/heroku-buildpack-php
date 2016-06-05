@@ -386,7 +386,7 @@ http {
     }
 
     ###############################
-    # robertneff.com              #
+    # www.robertneff.com          #
     ###############################
     server {
         # define an easy to reference name that can be used in try_files
@@ -408,7 +408,7 @@ http {
         }
         
         # TODO: use X-Forwarded-Host? http://comments.gmane.org/gmane.comp.web.nginx.english/2170
-        server_name robertneff.com;
+        server_name www.robertneff.com;
         listen <?=getenv('PORT')?:'8080'?>;
         # FIXME: breaks redirects with foreman
         port_in_redirect off;
