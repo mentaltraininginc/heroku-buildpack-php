@@ -427,5 +427,9 @@ http {
         location ~ \.php {
             try_files @heroku-fcgi @heroku-fcgi;
         }
+
+        location / {
+            index index.php;
+        }
     }
 }
